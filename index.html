@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledger — Goal Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js" defer></script>
+</head>
+<body>
+
+<!-- ============ APP SHELL ============ -->
+<div class="app" id="app">
+
+  <!-- ---------- SIDEBAR ---------- -->
+  <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">◆</span>
+      <span class="brand-name">Ledger</span>
+    </div>
+
+    <nav class="nav" role="tablist" aria-orientation="vertical">
+      <button class="nav-item is-active" data-view="dashboard" role="tab" aria-selected="true">
+        <span class="nav-idx">01</span><span class="nav-label">Dashboard</span>
+      </button>
+      <button class="nav-item" data-view="goals" role="tab">
+        <span class="nav-idx">02</span><span class="nav-label">Goals</span>
+      </button>
+      <button class="nav-item" data-view="tasks" role="tab">
+        <span class="nav-idx">03</span><span class="nav-label">Tasks</span>
+      </button>
+      <button class="nav-item" data-view="habits" role="tab">
+        <span class="nav-idx">04</span><span class="nav-label">Habits</span>
+      </button>
+      <button class="nav-item" data-view="calendar" role="tab">
+        <span class="nav-idx">05</span><span class="nav-label">Calendar</span>
+      </button>
+      <button class="nav-item" data-view="stats" role="tab">
+        <span class="nav-idx">06</span><span class="nav-label">Statistics</span>
+      </button>
+      <button class="nav-item" data-view="notes" role="tab">
+        <span class="nav-idx">07</span><span class="nav-label">Notes</span>
+      </button>
+      <button class="nav-item" data-view="timer" role="tab">
+        <span class="nav-idx">08</span><span class="nav-label">Timer</span>
+      </button>
+      <button class="nav-item" data-view="settings" role="tab">
+        <span class="nav-idx">09</span><span class="nav-label">Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div class="xp-seal" title="Your level">
+        <svg viewBox="0 0 60 60" class="xp-ring">
+          <circle cx="30" cy="30" r="26" class="xp-ring-track"/>
+          <circle cx="30" cy="30" r="26" class="xp-ring-fill" id="xpRingFill"/>
+        </svg>
+        <div class="xp-seal-inner">
+          <span id="levelNum">1</span>
+        </div>
+      </div>
+      <div class="xp-info">
+        <span class="xp-label">Level <span id="levelNumText">1</span></span>
+        <span class="xp-sub" id="xpText">0 / 100 XP</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- mobile nav toggle -->
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Open navigation">☰</button>
+
+  <!-- ---------- MAIN ---------- -->
+  <main class="main">
+
+    <!-- topbar -->
+    <header class="topbar">
+      <div class="topbar-search">
+        <input type="search" id="globalSearch" placeholder="Search goals, tasks, habits, notes…" aria-label="Search everything">
+        <div class="search-results" id="searchResults" hidden></div>
+      </div>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark theme">◐</button>
+        <div class="quote-chip" id="quoteChip">"Discipline is choosing what you want most over what you want now."</div>
+      </div>
+    </header>
+
+    <!-- views -->
+    <section class="view" id="view-dashboard" data-view-panel="dashboard"></section>
+    <section class="view" id="view-goals" data-view-panel="goals" hidden></section>
+    <section class="view" id="view-tasks" data-view-panel="tasks" hidden></section>
+    <section class="view" id="view-habits" data-view-panel="habits" hidden></section>
+    <section class="view" id="view-calendar" data-view-panel="calendar" hidden></section>
+    <section class="view" id="view-stats" data-view-panel="stats" hidden></section>
+    <section class="view" id="view-notes" data-view-panel="notes" hidden></section>
+    <section class="view" id="view-timer" data-view-panel="timer" hidden></section>
+    <section class="view" id="view-settings" data-view-panel="settings" hidden></section>
+
+  </main>
+</div>
+
+<!-- ---------- MODAL ROOT ---------- -->
+<div class="modal-overlay" id="modalOverlay" hidden>
+  <div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+</div>
+
+<!-- ---------- TOAST / CONFETTI ---------- -->
+<div class="toast" id="toast" hidden></div>
+<canvas id="confettiCanvas"></canvas>
+
+<script src="script.js"></script>
+</body>
+</html>
